@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Home Page</title>
+</head>
+<body>
+<h1>Hello World Web App!</h1>
+<h2>This is a Sample Web App.</h2>
+<h3>Jboss EAP is the webserver.</h3>
+<h4>Thanks for Visiting!!</h4>
+<br>
+	<form name="form1" action="sayHello/sayHelloToAll" method="GET">
+		<input name="secretText" type="hidden" value="secretValue"/>
+		<input type="submit" value="Say Hello to All" />
+	</form>
+<br>
+	<form name="form2" action="sayHello/sayHelloToUser" method="POST">
+		<input name="userName" type="text" placeholder="Enter your Name"/>
+		<input name="secretText" type="hidden" value="secretValue"/>
+		<input type="submit" value="Say Hello to User" />
+	</form>
+</body>
+</html>
