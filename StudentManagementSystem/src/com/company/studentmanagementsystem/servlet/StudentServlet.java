@@ -66,7 +66,11 @@ public class StudentServlet extends HttpServlet {
 			String country = request.getParameter("country");
 			String course = request.getParameter("course");
 			String dateOfBirthString = request.getParameter("dateOfBirth");
-			long zipcode = Long.parseLong(request.getParameter("zipcode"));
+			String zipCodeString = request.getParameter("zipcode");
+			if(zipCodeString == null || zipCodeString.isEmpty()) {
+				zipCodeString = "0";
+			}
+			long zipcode = Long.parseLong(zipCodeString);
 			System.out.println("Date of Birth from input is: "+dateOfBirthString);
 			java.util.Date utilDateOfBirth = null;
 			try {
