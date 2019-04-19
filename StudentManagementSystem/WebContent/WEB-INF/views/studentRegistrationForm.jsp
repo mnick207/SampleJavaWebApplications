@@ -176,11 +176,18 @@ h1{
 	function validateStudentRegForm() {
 		//firstname validation - is blank/empty
 		var firstName = document.studentRegForm.firstName.value;
+		var firstNameRegExp = /^[a-z A-Z]+$/;
 		if(firstName == ""){
 			alert("First Name cannot be Empty!");
 			document.studentRegForm.firstName.focus();
 			return false;
+		}else if(!firstNameRegExp.test(firstName)){
+			//verify if first name pattern matches input firstname 
+			alert("First Name can contain only Alphabets!");
+			document.studentRegForm.firstName.focus();
+			return false;
 		}
+		
 		
 		//contact number validation
 		var contactNum = document.studentRegForm.contactNumber.value;
