@@ -22,3 +22,12 @@ CREATE SEQUENCE students_student_id_seq
 INSERT INTO students VALUES(students_student_id_seq.nextval, 'test first name', 'test last name', 'testeamil@yahoo.com', '+91-9999988888', 'test city', 'test state', 'test country', 123456, sysdate, 'BTECH');
 
 INSERT INTO students(student_id, contact_num, course, date_of_birth, country, first_name) VALUES(students_student_id_seq.nextval, '+91-9999988888', 'BTECH', sysdate, 'test country','test first name');
+
+create table users(
+username varchar2(15),
+password varchar2(15),
+role varchar2(10)
+);
+
+insert into users values('scott','tiger','staff');
+

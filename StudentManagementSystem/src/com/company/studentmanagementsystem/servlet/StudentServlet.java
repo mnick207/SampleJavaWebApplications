@@ -1,10 +1,12 @@
 package com.company.studentmanagementsystem.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -131,7 +133,73 @@ public class StudentServlet extends HttpServlet {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/views/studentRegistrationResponse.jsp");
 			requestDispatcher.forward(request, response);
 			
-		}else{
+		}else if(request.getRequestURI().contains("loginFormVerification")) {
+			
+			System.out.println("In login form  processor block");
+			System.out.println("Validating user......");
+			//getting values form form 
+			String userName = request.getParameter("userName");
+			String password=request.getParameter("password");
+			
+			System.out.println(userName);
+			System.out.println(password);
+			Connection connection=null;
+			
+			
+			//jdbc connection
+			try {
+				//load the driver class
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+				
+				//create  the connection object  
+				connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","tiger");
+				
+				//create insert query
+				String selectUserQuery = "select * from users where username = ?";
+				
+				PreparedStatement preparedStatement = connection.prepareStatement(selectUserQuery);
+				preparedStatement.setString(1, userName);
+//				preparedStatement.setString(2, password);
+				
+				ResultSet rs=preparedStatement.executeQuery();
+				System.out.println(rs.getFetchSize());
+				while(rs.next()) {
+					System.out.println(rs.next());
+					System.out.println(rs.getString("username"));
+					System.out.println(rs.getString("password"));
+				}
+				PrintWriter pw=response.getWriter();
+				
+				pw.println("<html><body bgcolor=red text=yellow><h1>");
+				
+				if(rs.next()) {
+					pw.println("Welcome "+userName);
+				}
+				else
+				{
+					pw.println("Invlid Username/Password");
+				}
+				 
+				pw.println("</h1></body></html>");
+				
+				
+			} catch (ClassNotFoundException e) {
+				System.out.println("Error occured is: "+e.getMessage());
+			} catch (SQLException e) {
+				System.out.println("Error occured is: "+e.getMessage());
+			}finally {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					System.out.println("Exception in Closing DB Connection!!");
+				}
+			}
+			
+			
+			
+			
+		}
+		else{
 			request.setAttribute("errorText", "Invalid URL Pattern!!");
 			RequestDispatcher requestDispatcher =  request.getRequestDispatcher("/WEB-INF/views/error.jsp");
 			requestDispatcher.forward(request, response);

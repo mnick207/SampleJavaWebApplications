@@ -198,7 +198,7 @@ h1{
     </div>
    <div class="form-row-label-input">
 	    <div class="form-row-label"><label>Date-Of-Birth</label><span style="color: red;">&nbsp;*</span></div>
-      <div class="form-row-input"><input type="date" name="dateOfBirth"></div>
+      <div class="form-row-input"><input type="date" name="dateOfBirth" onChange="validateDateOfBirth();"></div>
   </div>
   <div class="form-row-error-outer" id="dateOfBirthErrorMsgOuter">
     <div class="form-row-error"><span style="color: red;" id="dateOfBirthErrorMsg"></span></div>
@@ -436,23 +436,24 @@ h1{
 			document.getElementById("dateOfBirthErrorMsgOuter").style.display="block";
 			document.getElementById("dateOfBirthErrorMsg").innerHTML="Enter a valid Date Of Birth!";
 			document.studentRegForm.dateOfBirth.focus();
+			return false;
 		} */
 		else{
 			document.getElementById("dateOfBirthErrorMsg").innerHTML="";
-			document.getElementById("dateOfBirthMsgOuter").style.display="none";
+			document.getElementById("dateOfBirthErrorMsgOuter").style.display="none";
 			return true;
 		}
 		
 	}
 	function validateCourse(){
-		console.log("from validateCourse function");
-		alert("from validateCourse function");
+		/* console.log("from validateCourse function");
+		alert("from validateCourse function"); */
 		//course validation
 		var course = document.getElementById("courseDropDown");
 		var selectedCourse = course.options[course.selectedIndex].value;
 		if(selectedCourse =="default"){
-			alert("default selected");
-			console.log("default selected");
+			/* alert("default selected");
+			console.log("default selected"); */
 			/* alert("You Should select a course!"); */
 			document.getElementById("courseErrorMsgOuter").style.display="block";
 			document.getElementById("courseErrorMsg").innerHTML="You Should select a course!";
