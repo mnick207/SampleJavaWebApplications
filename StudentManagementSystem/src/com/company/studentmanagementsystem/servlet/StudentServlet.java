@@ -141,8 +141,7 @@ public class StudentServlet extends HttpServlet {
 			String userName = request.getParameter("userName");
 			String password=request.getParameter("password");
 			
-			System.out.println(userName);
-			System.out.println(password);
+			
 			Connection connection=null;
 			
 			
@@ -162,12 +161,8 @@ public class StudentServlet extends HttpServlet {
 //				preparedStatement.setString(2, password);
 				
 				ResultSet rs=preparedStatement.executeQuery();
-				System.out.println(rs.getFetchSize());
-				while(rs.next()) {
-					System.out.println(rs.next());
-					System.out.println(rs.getString("username"));
-					System.out.println(rs.getString("password"));
-				}
+				
+				
 				PrintWriter pw=response.getWriter();
 				
 				pw.println("<html><body bgcolor=red text=yellow><h1>");
